@@ -1,0 +1,60 @@
+html, body {
+    height: 100%; /* Tam yükseklik için html ve body'yi %100 yap */
+    margin: 0; /* Varsayılan margin'i kaldır */
+}
+
+.body-container {
+    display: flex; /* Flexbox kullan */
+    flex-direction: column; /* Dikey sırala */
+    justify-content: center; /* Yatay ortala */
+    align-items: center; /* Dikey ortala */
+    height: 100%; /* Tam yükseklik */
+}
+
+#hero video {
+    position: fixed; /* Video konumunu sabitle */
+    right: 0;
+    bottom: 0;
+    min-width: 100%; /* Video minimum genişliği %100 */
+    min-height: 100%; /* Video minimum yüksekliği %100 */
+    width: auto; /* Genişlik otomatik ayarlansın */
+    height: auto; /* Yükseklik otomatik ayarlansın */
+    z-index: -1; /* Alt katman */
+    object-fit: cover; /* Videosu alanı kaplasın */
+}
+
+.content {
+    display: flex; /* Flexbox kullan */
+    justify-content: center; /* Yatay ortala */
+    align-items: center; /* Dikey ortala */
+    flex-direction: column; /* İçerikleri dikey sırala */
+    z-index: 1; /* Üst katman */
+    color: rgb(255, 253, 253);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Yazı gölgesi */
+    padding: 40px; /* İç boşluk */
+    max-width: 600px; /* Maksimum genişlik */
+    margin: 0 auto; /* Ortalamak için otomatik marjin */
+    font-weight:10% ;
+    background: rgba(255, 255, 255, 0.1); /* Yüzey arka planı */
+    backdrop-filter: blur(10px); /* Arka planı bulanıklaştır */
+    border-radius: 50px; /* Köşe yuvarlama */
+    box-shadow: 0 90px 30px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+    font-size:large;
+    
+}
+
+.link {
+    font-size: 24px; /* Yazı tipi boyutu */
+    display: block; /* Blok düzende görüntüle */
+    margin: 15px 0; /* Dikey marjin */
+    color: #002fff; /* Yazı rengi */
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    background: rgba(0, 0, 0, 0.7); /* Arka plan rengi */
+    padding: 10px; /* İç boşluk */
+    border-radius: 5px; /* Köşe yuvarlama */
+    transition: background 0.3s; /* Geçiş efekti */
+}
+
+.link:hover {
+    background: rgba(0, 0, 0, 0.9); /* Üzerine gelindiğinde arka plan rengi değişimi */
+}
