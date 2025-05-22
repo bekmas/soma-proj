@@ -1,26 +1,27 @@
 html, body {
-    height: 100%; /* Tam yükseklik için html ve body'yi %100 yap */
-    margin: 0; /* Varsayılan margin'i kaldır */
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; 
 }
 
 .body-container {
-    display: flex; /* Flexbox kullan */
-    flex-direction: column; /* Dikey sırala */
-    justify-content: center; /* Yatay ortala */
-    align-items: center; /* Dikey ortala */
-    height: 100%; /* Tam yükseklik */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative; 
 }
 
 #hero video {
-    position: fixed; /* Video konumunu sabitle */
-    right: 0;
-    bottom: 0;
-    min-width: 100%; /* Video minimum genişliği %100 */
-    min-height: 100%; /* Video minimum yüksekliği %100 */
-    width: auto; /* Genişlik otomatik ayarlansın */
-    height: auto; /* Yükseklik otomatik ayarlansın */
-    z-index: -1; /* Alt katman */
-    object-fit: cover; /* Videosu alanı kaplasın */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;  
 }
 
 .content {
@@ -56,5 +57,5 @@ html, body {
 }
 
 .link:hover {
-    background: rgba(0, 0, 0, 0.9); /* Üzerine gelindiğinde arka plan rengi değişimi */
+    background: rgba(0, 0, 0, 0.9); /* Üzerine gelindiğinde arka plan rengi değişimi */
 }
