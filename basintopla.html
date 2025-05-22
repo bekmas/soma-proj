@@ -32,7 +32,7 @@
       padding: 30px;
       border-radius: 20px;
       color: #fff;
-      max-width: 700px;
+      max-width: 750px;
       text-align: center;
       font-family: 'Arial', sans-serif;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
@@ -40,7 +40,25 @@
       animation: fadeIn 1.5s ease forwards;
     }
 
-    /* Seçim linki */
+    /* Beyaz çizgi */
+    .divider {
+      margin: 30px 0;
+      height: 2px;
+      background-color: white;
+      opacity: 0.8;
+    }
+
+    /* Seçim çubuğu */
+    .choice-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      padding-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Seçim butonları */
     .choice-link {
       text-decoration: none;
       color: #ccc;
@@ -48,10 +66,9 @@
       font-family: 'Arial', sans-serif;
       position: relative;
       padding-bottom: 5px;
-      transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease, opacity 0.6s ease;
       letter-spacing: 2px;
       display: inline-block;
-      margin-top: 30px;
     }
 
     .choice-link:hover {
@@ -87,11 +104,15 @@
       }
     }
 
-    /* Responsive */
+    /* Responsive düzeltme */
     @media (max-width: 480px) {
       .content {
         font-size: 18px;
         padding: 20px;
+      }
+      .choice-bar {
+        flex-direction: column;
+        gap: 20px;
       }
       .choice-link {
         font-size: 20px;
@@ -113,9 +134,20 @@
   <div class="body-container">
     <div class="content">
       
-      <center>Vicdanının sesi: <br>Ailen güvende, ama her aynaya baktığında madencileri görüyorsun.</center> <br>
+      <p><strong>Haberlerde sensin, olaylar sosyal medyada gündem oluyor...</strong><br>
+      <em>Telefonda bir ses: "Konuşursan ailen zarar görür."</em></p>
 
-      <a href="index.html" class="choice-link">YENİDEN BAŞLA</a>
+      <div class="divider"></div>
+
+      <div class="choice-bar">
+        <div>
+          <a href="peset.html" class="choice-link">Pes etme</a>
+        </div>
+
+        <div>
+          <a href="geri.html" class="choice-link">Geri çekil</a>
+        </div>
+      </div>
 
     </div>
   </div>

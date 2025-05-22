@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Start</title>
+  <title>Seçim Ekranı</title>
 
   <style>
     /* Arka plan video */
@@ -32,7 +32,7 @@
       padding: 30px;
       border-radius: 20px;
       color: #fff;
-      max-width: 700px;
+      max-width: 750px;
       text-align: center;
       font-family: 'Arial', sans-serif;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
@@ -40,7 +40,25 @@
       animation: fadeIn 1.5s ease forwards;
     }
 
-    /* Seçim linki */
+    /* Beyaz çizgi */
+    .divider {
+      margin: 30px 0;
+      height: 2px;
+      background-color: white;
+      opacity: 0.8;
+    }
+
+    /* Seçim çubuğu */
+    .choice-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      padding-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Seçim butonları */
     .choice-link {
       text-decoration: none;
       color: #ccc;
@@ -48,10 +66,9 @@
       font-family: 'Arial', sans-serif;
       position: relative;
       padding-bottom: 5px;
-      transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease, opacity 0.6s ease;
       letter-spacing: 2px;
       display: inline-block;
-      margin-top: 30px;
     }
 
     .choice-link:hover {
@@ -75,7 +92,15 @@
       width: 100%;
     }
 
-    /* Fade-in animasyon */
+    /* Küçük açıklamalar */
+    .link-desc {
+      display: block;
+      font-size: 16px;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    /* Fade-in animasyonu */
     @keyframes fadeIn {
       0% {
         opacity: 0;
@@ -93,9 +118,16 @@
         font-size: 18px;
         padding: 20px;
       }
+      .choice-bar {
+        flex-direction: column;
+        gap: 20px;
+      }
       .choice-link {
         font-size: 20px;
         letter-spacing: 1px;
+      }
+      .link-desc {
+        font-size: 14px;
       }
     }
   </style>
@@ -112,10 +144,24 @@
 
   <div class="body-container">
     <div class="content">
-      
-      <center>Vicdanının sesi: <br>Ailen güvende, ama her aynaya baktığında madencileri görüyorsun.</center> <br>
 
-      <a href="index.html" class="choice-link">YENİDEN BAŞLA</a>
+      <p>Evinde, karanlık bir odada oturuyorsun...</p>
+
+      <div class="divider"></div>
+
+      <div class="choice-bar">
+        
+        <div>
+          <a href="cagri.html" class="choice-link">Çağrıyı Aç</a>
+          <span class="link-desc">(Gerçeği duyurmaya hazır mısın?)</span>
+        </div>
+
+        <div>
+          <a href="telefonukapat.html" class="choice-link">Telefonu Kapat</a>
+          <span class="link-desc">(Şirketin seni bulmasına sakın izin verme..)</span>
+        </div>
+
+      </div>
 
     </div>
   </div>
