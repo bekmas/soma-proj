@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ses Testi</title>
+</head>
+<body>
+    <a href="#" class="choice-button">Test Butonu (Tıkla)</a>
+    <audio id="click-sound" src="mixkit-cinematic-whoosh-fast-transition-1492 (online-audio-converter.com)" preload="auto"></audio>
+    <script>
+    document.querySelectorAll('.choice-button').forEach(function(link){
+        link.addEventListener('click', function(e){
+            var snd = document.getElementById('click-sound');
+            if(snd) {
+                snd.currentTime = 0;
+                snd.play();
+            }
+            e.preventDefault();
+            var href = this.href;
+            setTimeout(function(){
+                window.location.href = href;
+            }, 300);
+        });
+    });
+    </script>
+</body>
+</html>

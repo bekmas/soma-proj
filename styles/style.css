@@ -1,8 +1,13 @@
 html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    overflow: hidden; 
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 .body-container {
@@ -11,51 +16,75 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    position: relative; 
+    position: relative;
+}
+
+#hero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
 
 #hero video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(0.7) blur(1px);
+  pointer-events: none;
+}
+
+@media screen and (max-width: 75px) {
+  #hero video {
+    object-fit: contain;
+  }
 }
 
 .content {
-    display: flex; /* Flexbox kullan */
-    justify-content: center; /* Yatay ortala */
-    align-items: center; /* Dikey ortala */
-    flex-direction: column; /* İçerikleri dikey sırala */
-    z-index: 1; /* Üst katman */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    z-index: 1; 
     color: rgb(255, 253, 253);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Yazı gölgesi */
-    padding: 40px; /* İç boşluk */
-    max-width: 600px; /* Maksimum genişlik */
-    margin: 0 auto; /* Ortalamak için otomatik marjin */
-    font-weight:10% ;
-    background: rgba(255, 255, 255, 0.1); /* Yüzey arka planı */
-    backdrop-filter: blur(10px); /* Arka planı bulanıklaştır */
-    border-radius: 50px; /* Köşe yuvarlama */
-    box-shadow: 0 90px 30px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-    font-size:large;
-    
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 40px; 
+    max-width: 600px; 
+    margin: 0 auto; 
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px); 
+    border-radius: 50px; 
+    box-shadow: 0 90px 30px rgba(0, 0, 0, 0.1); 
+    font-size: large;
+    box-sizing: border-box;
 }
 
 .link {
-    font-size: 24px; /* Yazı tipi boyutu */
-    display: block; /* Blok düzende görüntüle */
-    margin: 15px 0; /* Dikey marjin */
-    color: #002fff; /* Yazı rengi */
-    text-decoration: none; /* Alt çizgiyi kaldır */
-    background: rgba(0, 0, 0, 0.7); /* Arka plan rengi */
-    padding: 10px; /* İç boşluk */
-    border-radius: 5px; /* Köşe yuvarlama */
-    transition: background 0.3s; /* Geçiş efekti */
+    font-size: 24px; 
+    display: block; 
+    margin: 15px 0; 
+    color: #002fff; 
+    text-decoration: none; 
+    background: rgba(0, 0, 0, 0.7); 
+    padding: 10px; 
+    border-radius: 5px; 
+    transition: background 0.3s; 
 }
 
 .link:hover {
-    background: rgba(0, 0, 0, 0.9); /* Üzerine gelindiğinde arka plan rengi değişimi */
+    background: rgba(0, 0, 0, 0.9); 
+}
+
+@media (max-width: 75px) {
+    .content {
+        padding: 20px;
+        font-size: medium;
+    }
 }
