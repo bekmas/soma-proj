@@ -156,6 +156,16 @@
 
     </div>
   </div>
+  <!-- Arka plan müziği -->
+     <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
+    <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
+<script>
+  document.addEventListener('click', function startMusic() {
+    var music = document.getElementById('background-music');
+    if (music && music.paused) music.play();
+    document.removeEventListener('click', startMusic);
+  });
+</script>
    <!-- MP3 ses dosyası -->
    <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
 
