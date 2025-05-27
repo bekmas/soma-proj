@@ -163,6 +163,25 @@
 
     </div>
   </div>
+   <!-- MP3 ses dosyası -->
+   <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
+
+<script>
+  document.querySelectorAll('.choice-link, .choice-button').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var snd = document.getElementById('click-sound');
+      if (snd) {
+        snd.currentTime = 0;
+        snd.play();
+      }
+      var href = this.href;
+      setTimeout(function() {
+        window.location.href = href;
+      }, 600);
+    });
+  });
+</script>
 
 </body>
 </html>
