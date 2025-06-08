@@ -2,42 +2,17 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hikayeye Başla</title>
     <style>
-        html, body {
-            width: 100vw; height: 100vh; margin: 0; padding: 0; box-sizing: border-box;
-            overflow: hidden; font-family: 'Arial', sans-serif;
-            background: #181818;
-        }
-        .center-box {
-            width: 100vw; height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; background: rgba(0,0,0,0.7);
-        }
-        .basla-btn {
-            font-size: 2rem;
-            background: #fff;
-            color: #181818;
-            border: none;
-            padding: 18px 48px;
-            border-radius: 30px;
-            box-shadow: 0 2px 18px #0005;
-            cursor: pointer;
-            margin-top: 40px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-        }
-        .basla-btn:hover {
-            background: #222;
-            color: #fff;
-            transform: scale(1.09);
-        }
+        body { background: #181818; color: #fff; font-family: Arial, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .center-box { background: rgba(0,0,0,0.7); padding: 40px 60px; border-radius: 20px; text-align: center; }
+        .basla-btn { font-size: 2rem; padding: 18px 48px; border-radius: 30px; border: none; background: #fff; color: #181818; cursor: pointer; }
+        .basla-btn:hover { background: #222; color: #fff; }
     </style>
 </head>
 <body>
     <div class="center-box">
-        <h1 style="color:white; font-size:2.3rem;">İnteraktif Haber Oyununa Hoşgeldiniz</h1>
+        <h1>İnteraktif Haber Oyununa Hoşgeldiniz</h1>
         <button class="basla-btn" id="baslaBtn">BAŞLA</button>
     </div>
     <audio id="background-music" src="sounds2/arkaplan.mp3" preload="auto" loop></audio>
@@ -48,7 +23,7 @@
             music.play();
             localStorage.setItem("music_should_play", "yes");
             setTimeout(function(){
-                window.location.href = "secim.html"; // Oyun ekranının dosya adı
+                window.location.href = "secim.html";
             }, 300);
         });
     </script>
