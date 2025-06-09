@@ -8,10 +8,17 @@
         .center-box { background: rgba(0,0,0,0.7); padding: 40px 60px; border-radius: 20px; text-align: center; }
         .basla-btn { font-size: 2rem; padding: 18px 48px; border-radius: 30px; border: none; background: #fff; color: #181818; cursor: pointer; }
         .basla-btn:hover { background: #222; color: #fff; }
+        .video-container { margin-bottom: 30px; }
     </style>
 </head>
 <body>
     <div class="center-box">
+        <div class="video-container">
+            <video width="480" controls autoplay muted>
+                <source src="video/basla.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+        </div>
         <h1>İnteraktif Haber Oyununa Hoşgeldiniz</h1>
         <button class="basla-btn" id="baslaBtn">BAŞLA</button>
     </div>
