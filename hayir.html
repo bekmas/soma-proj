@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seçim Sonu</title>
+  <title>Seçim Ekranı</title>
   <style>
     html, body {
       width: 100vw;
@@ -12,28 +12,21 @@
       padding: 0;
       overflow: hidden;
       box-sizing: border-box;
-      background: #181a1b;
     }
-    *, *::before, *::after {
-      box-sizing: inherit;
-    }
+    *, *::before, *::after { box-sizing: inherit; }
     #hero {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       z-index: -1;
       overflow: hidden;
     }
     #hero video {
-      width: 100vw;
-      height: 100vh;
+      width: 100vw; height: 100vh;
       object-fit: cover;
       object-position: center;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       filter: brightness(0.7) blur(1px);
       pointer-events: none;
     }
@@ -46,76 +39,91 @@
       position: relative;
     }
     .content {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 32px 24px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
       border-radius: 20px;
       color: #fff;
       max-width: 750px;
       text-align: center;
       font-family: 'Arial', sans-serif;
-      box-shadow: 0 0 20px rgba(255,255,255,0.08);
-      font-size: 19px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      font-size: 20px;
       animation: fadeIn 1.5s ease forwards;
       z-index: 1;
+      position: relative;
     }
-    .content h2 {
-      color: #ff5555;
-      border-bottom: 2px solid #ff5555;
-      padding-bottom: 10px;
-      margin-top: 0;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-    }
-    .content em {
-      color: #ffb366;
-      font-style: italic;
-      display: block;
-      margin: 16px 0 8px 0;
-      font-size: 1.08em;
+    .choice-retry {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 32px;
+      position: relative;
     }
     .choice-link {
-      display: inline-block;
-      margin-top: 38px;
       text-decoration: none;
       color: #ccc;
-      background: #232526;
-      padding: 12px 36px;
-      border-radius: 30px;
-      font-size: 21px;
+      font-size: 22px;
       font-family: 'Arial', sans-serif;
+      position: relative;
+      padding-bottom: 5px;
+      transition: color 0.3s ease, transform 0.3s ease;
       letter-spacing: 2px;
+      display: inline-block;
+      background: none;
       border: none;
-      transition: 
-        color 0.2s, 
-        background 0.2s, 
-        transform 0.2s, 
-        box-shadow 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      font-weight: 600;
+      outline: none;
     }
     .choice-link:hover {
       color: #fff;
-      background: #303233;
-      transform: scale(1.07);
-      box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+      transform: scale(1.08);
+    }
+    .choice-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0%;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+    .choice-link:hover::after {
+      width: 100%;
+    }
+    .retry-desc {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 100%;
+      margin-top: 4px;
+      font-size: 16px;
+      color: #ccc;
+      opacity: 0;
+      pointer-events: none;
+      white-space: pre-line;
+      transition: opacity 0.3s;
+      text-align: center;
+      max-width: 90vw;
+      line-height: 1.5;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      z-index: 10;
+    }
+    .choice-retry:hover .retry-desc,
+    .choice-retry:focus-within .retry-desc {
+      opacity: 1;
+      pointer-events: auto;
     }
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(24px);}
-      100% { opacity: 1; transform: translateY(0);}
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     @media (max-width: 768px) {
-      .content {
-        font-size: 17px;
-        padding: 18px 8px;
-        max-width: 96vw;
-      }
-      .choice-link {
-        font-size: 18px;
-        padding: 11px 16px;
-      }
-      #hero video {
-        object-fit: contain;
-      }
+      .content { font-size: 18px; padding: 20px; max-width: 95vw; }
+      .choice-link { font-size: 20px; letter-spacing: 1px; }
+      #hero video { object-fit: contain; }
+      .retry-desc { font-size: 14px; }
     }
   </style>
 </head>
@@ -127,44 +135,45 @@
   </div>
   <div class="body-container">
     <div class="content">
-      <h2>SEÇİMLERİN SONUNDA</h2>
-      <p>Adalet için savaştın, ama bedeli ağır oldu.<br>
-      Ailen güvende, ama her aynaya baktığında onları görüyorsun.<br>
-      Paranın vicdanı susturamayacağını artık biliyorsun!</p>
-      <em>Gece yarısı... Madenin derinliklerinden gelen fısıltılar...<br>
-      "Sessizliğinle ölümümüzü mühürledin."</em>
-      <p>Sabah gazetesi manşeti: "Eski Madenci: Sessizce Kaybolan Bir Hayat... Ne Oldu?"</p>
-      <a href="index.html" class="choice-link">YENİDEN BAŞLA</a>
+      <p>Adalet için savaştınız...
+Ama zaferin bedeli içinizi yaktı.
+Aileniz güvende, evet...
+Ancak her aynaya baktığınızda, o gözler size bakıyor:
+Paranın susturamayacağı vicdanlar var!<br>
+Madenin derinliklerinden sızan fısıltılar yastığınıza vuruyor:
+</p>
+      <em>Sessizliğinle ölümümüzü mühürledin...<br></em>
+      <p> SESSİZCE KAYBOLAN 301 HAYAT...
+NE OLDU?
+</p>
+   <div class="choice-retry">
+        <a href="index.html" class="choice-link">YENİDEN BAŞLA</a>
+        <span class="retry-desc">Bir kez daha denemeye cesaretin var mı?</span>
+      </div>
     </div>
   </div>
-  <!-- Arka plan müziği -->
-     <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
-    <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
-<script>
-  document.addEventListener('click', function startMusic() {
-    var music = document.getElementById('background-music');
-    if (music && music.paused) music.play();
-    document.removeEventListener('click', startMusic);
-  });
-</script>
-   <!-- MP3 ses dosyası -->
-   <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
-
-<script>
-  document.querySelectorAll('.choice-link, .choice-button').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var snd = document.getElementById('click-sound');
-      if (snd) {
-        snd.currentTime = 0;
-        snd.play();
-      }
-      var href = this.href;
-      setTimeout(function() {
-        window.location.href = href;
-      }, 600);
+  <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
+  <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
+  <script>
+    document.addEventListener('click', function startMusic() {
+      var music = document.getElementById('background-music');
+      if (music && music.paused) music.play();
+      document.removeEventListener('click', startMusic);
     });
-  });
-</script>
+    document.querySelectorAll('.choice-link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var snd = document.getElementById('click-sound');
+        if (snd) {
+          snd.currentTime = 0;
+          snd.play();
+        }
+        var href = this.href;
+        setTimeout(function() {
+          window.location.href = href;
+        }, 600);
+      });
+    });
+  </script>
 </body>
 </html>
