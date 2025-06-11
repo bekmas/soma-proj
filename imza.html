@@ -20,7 +20,7 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-     background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
             transition: opacity 0.7s;
         }
         #backgroundGradient.hidden {
@@ -31,7 +31,7 @@
             inset: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.15); /* Hafif siyah perde */
+            background: rgba(0,0,0,0.10); /* Hafif siyah perde */
             z-index: 3;
             pointer-events: none;
             opacity: 0;
@@ -79,27 +79,39 @@
             align-items: center;
             z-index: 4; /* overlay üstünde olacak butonlar için */
         }
+        /* ----- KUTUCUK STILI ----- */
         .content {
-            background: transparent;
-            padding: 40px 60px;
-            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.50);
+            padding: 80px 140px;
+            border-radius: 32px;
             color: #fff;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: none;
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
             z-index: 4;
-            max-width: 90vw;
-            min-width: 270px;
+            max-width: 98vw;
+            min-width: 540px;
+            backdrop-filter: blur(3px);
         }
         #introTitle {
-            font-size: 22px;
+            font-size: 2.4rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 32px;
         }
         #introBtn {
-            font-size: 18px;
-            padding: 10px 32px;
-            margin-top: 20px;
+            font-size: 1.4rem;
+            padding: 16px 48px;
+            border-radius: 30px;
+            border: none;
+            background: #fff;
+            color: #181818;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: 0.2s;
+        }
+        #introBtn:hover {
+            background: #222;
+            color: #fff;
         }
         .buton {
             font-size: 18px;
@@ -136,10 +148,28 @@
         .hidden {
             display: none !important;
         }
+        @media (max-width: 900px) {
+            .content {
+                padding: 36px 12vw;
+                min-width: 0;
+            }
+            #introTitle {
+                font-size: 1.3rem;
+            }
+            #introBtn {
+                font-size: 1rem;
+                padding: 12px 30px;
+            }
+        }
+        @media (max-width: 600px) {
+            .content {
+                padding: 16px 4vw;
+            }
+        }
         @media (max-width: 768px) {
             .content {
                 font-size: 16px;
-                padding: 16px;
+                padding: 16px 4vw;
                 max-width: 95vw;
             }
             #introTitle {
