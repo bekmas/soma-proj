@@ -20,7 +20,7 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+     background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
             transition: opacity 0.7s;
         }
         #backgroundGradient.hidden {
@@ -80,17 +80,16 @@
             z-index: 4; /* overlay üstünde olacak butonlar için */
         }
         .content {
-            background: rgba(0, 0, 0, 0.45); /* Hafif şeffaf kutucuk */
+            background: transparent;
             padding: 40px 60px;
             border-radius: 20px;
             color: #fff;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: 0 2px 24px 0 rgba(0,0,0,0.15);
+            box-shadow: none;
             z-index: 4;
             max-width: 90vw;
             min-width: 270px;
-            backdrop-filter: blur(2px);
         }
         #introTitle {
             font-size: 22px;
