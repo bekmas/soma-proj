@@ -12,10 +12,6 @@
             padding: 0;
             overflow: hidden;
             background: #000;
-              box-sizing: border-box;
-        }
-        *, *::before, *::after {
-            box-sizing: inherit;
         }
         #backgroundGradient {
             position: fixed;
@@ -24,7 +20,7 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+     background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
             transition: opacity 0.7s;
         }
         #backgroundGradient.hidden {
@@ -72,28 +68,29 @@
         #girisVideo.visible {
             opacity: 1;
         }
-         .body-container {
+        .body-container {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            position: relative;
+            z-index: 4; /* overlay üstünde olacak butonlar için */
         }
         .content {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
+            background: transparent;
+            padding: 40px 60px;
             border-radius: 20px;
             color: #fff;
-            max-width: 750px;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            font-size: 20px;
-            animation: fadeIn 1.5s ease forwards;
-            z-index: 1;
+            box-shadow: none;
+            z-index: 4;
+            max-width: 90vw;
+            min-width: 270px;
         }
-
         #introTitle {
             font-size: 22px;
             font-weight: bold;
