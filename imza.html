@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <title>Hikayeye Başla</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seçim Ekranı</title>
     <style>
         html, body {
             width: 100vw;
@@ -12,21 +11,48 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            box-sizing: border-box;
+            background: #000;
+        }
+        #backgroundGradient {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+            transition: opacity 0.7s;
+        }
+        #backgroundGradient.hidden {
+            opacity: 0;
+        }
+        #videoOverlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.15); /* Hafif siyah perde */
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.7s;
+        }
+        #videoOverlay.visible {
+            opacity: 1;
         }
         *, *::before, *::after {
             box-sizing: inherit;
         }
         #hero {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
-            overflow: hidden;
+            z-index: 1;
+            background: transparent;
+            transition: background 0.7s;
         }
-        #hero video {
+        #girisVideo {
             width: 100vw;
             height: 100vh;
             object-fit: cover;
@@ -34,161 +60,141 @@
             position: absolute;
             top: 0;
             left: 0;
-            filter: brightness(0.7) blur(1px);
-            pointer-events: none;
+            filter: brightness(1) blur(1px);
+            opacity: 0;
+            transition: opacity 0.7s;
+            z-index: 2;
+        }
+        #girisVideo.visible {
+            opacity: 1;
         }
         .body-container {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            position: relative;
+            z-index: 4; /* overlay üstünde olacak butonlar için */
         }
         .content {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
+            background: rgba(0, 0, 0, 0.45); /* Hafif şeffaf kutucuk */
+            padding: 40px 60px;
             border-radius: 20px;
             color: #fff;
-            max-width: 750px;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            font-size: 20px;
-            animation: fadeIn 1.5s ease forwards;
-            z-index: 1;
+            box-shadow: 0 2px 24px 0 rgba(0,0,0,0.15);
+            z-index: 4;
+            max-width: 90vw;
+            min-width: 270px;
+            backdrop-filter: blur(2px);
         }
-        .divider {
-            margin: 30px 0;
-            height: 2px;
-            background-color: white;
-            opacity: 0.8;
-        }
-        .choice-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
-            padding: 20px 0;
-            flex-wrap: wrap;
-        }
-        .choice-bar > div {
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards;
-        }
-        .choice-bar > div:nth-child(1) {
-            animation-delay: 1s;
-        }
-        .choice-bar > div:nth-child(2) {
-            animation-delay: 1.3s;
-        }
-        .choice-link, .choice-button {
-            text-decoration: none;
-            color: #ccc;
+        #introTitle {
             font-size: 22px;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-            padding-bottom: 5px;
-            transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
-            letter-spacing: 2px;
-            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
-
-        .choice-link:hover, .choice-button:hover {
+        #introBtn {
+            font-size: 18px;
+            padding: 10px 32px;
+            margin-top: 20px;
+        }
+        .buton {
+            font-size: 18px;
+            padding: 10px 32px;
+            border-radius: 30px;
+            border: none;
+            background: #fff;
+            color: #181818;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+        .buton:hover {
+            background: #222;
             color: #fff;
-            transform: scale(1.08);
-            filter: brightness(1.2);
         }
-        .choice-link::after, .choice-button::after {
-            content: "";
+        #baslaBtn {
             position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 2px;
-            width: 0%;
-            background-color: white;
-            transition: width 0.3s ease;
+            left: 50%;
+            top: 82%;
+            transform: translate(-50%, 0);
+            margin-top: 0;
+            z-index: 5;
+            font-size: 20px;
+            padding: 12px 38px;
+            background: #fff !important;
+            color: #181818 !important;
+            border: none;
         }
-        .choice-link:hover::after, .choice-button:hover::after {
-            width: 100%;
+        #baslaBtn:hover {
+            background: #222 !important;
+            color: #fff !important;
         }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hidden {
+            display: none !important;
         }
         @media (max-width: 768px) {
             .content {
-                font-size: 18px;
-                padding: 20px;
+                font-size: 16px;
+                padding: 16px;
                 max-width: 95vw;
             }
-            .choice-bar {
-                flex-direction: column;
-                gap: 20px;
-                padding: 15px 0;
+            #introTitle {
+                font-size: 16px;
             }
-            .choice-link, .choice-button {
-                font-size: 24px;
-                letter-spacing: 2px;
+            #introBtn, .buton {
+                font-size: 15px;
+                padding: 8px 20px;
             }
-            #hero video {
-                object-fit: contain;
+            #baslaBtn {
+                font-size: 17px;
+                padding: 9px 25px;
+                top: 78%;
             }
         }
     </style>
 </head>
 <body>
-  <div id="hero">
-    <video autoplay loop muted>
-      <source src="video/video.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="body-container">
-    <div class="content">
-      <p>Çocuğunun mezuniyeti. Mutlu fotoğraflar… Ama geceleri rüyalarında madencilerin çığlıkları yankılanıyor:
-“Neden sustun?”</p>
-
-      <div class="divider"></div>
-
-      <div class="choice-bar">
-        <div>
-          <a href="hayatindevam.html" class="choice-link">Hayatına Devam Et</a>
-        </div>
-        <div>
-          <a href="itiraf.html" class="choice-link">İtiraf Et</a>
-        </div>
-      </div>
+    <div id="backgroundGradient"></div>
+    <div id="hero">
+        <video id="girisVideo" autoplay loop muted>
+            <source src="video/basla.mp4" type="video/mp4">
+        </video>
     </div>
-  </div>
-  <!-- Arka plan müziği -->
-  <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
-  <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
-  <script>
-    document.addEventListener('click', function startMusic() {
-      var music = document.getElementById('background-music');
-      if (music && music.paused) music.play();
-      document.removeEventListener('click', startMusic);
-    });
-    document.querySelectorAll('.choice-link, .choice-button').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var snd = document.getElementById('click-sound');
-        if (snd) {
-          snd.currentTime = 0;
-          snd.play();
-        }
-        var href = this.href;
-        setTimeout(function() {
-          window.location.href = href;
-        }, 600);
-      });
-    });
-  </script>
+    <div id="videoOverlay"></div>
+    <div class="body-container">
+        <div class="content" id="introContent">
+            <h1 id="introTitle">İnteraktif Haber Oyununa Hoşgeldiniz</h1>
+            <button class="buton" id="introBtn">INTRO</button>
+        </div>
+        <button class="buton hidden" id="baslaBtn">BAŞLA</button>
+    </div>
+    <script>
+        const introBtn = document.getElementById('introBtn');
+        const baslaBtn = document.getElementById('baslaBtn');
+        const girisVideo = document.getElementById('girisVideo');
+        const introContent = document.getElementById('introContent');
+        const backgroundGradient = document.getElementById('backgroundGradient');
+        const videoOverlay = document.getElementById('videoOverlay');
+
+        introBtn.addEventListener('click', function() {
+            girisVideo.classList.add('visible');
+            girisVideo.muted = false;
+            girisVideo.volume = 1;
+            girisVideo.play();
+            introContent.classList.add('hidden');
+            baslaBtn.classList.remove('hidden');
+            backgroundGradient.classList.add('hidden');
+            videoOverlay.classList.add('visible');
+        });
+
+        baslaBtn.addEventListener('click', function() {
+            window.location.href = "secim.html";
+        });
+    </script>
 </body>
+</html>
