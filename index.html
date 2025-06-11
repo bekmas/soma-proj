@@ -31,7 +31,7 @@
             inset: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.15); /* Hafif siyah perde */
+            background: rgba(0,0,0,0.15);
             z-index: 3;
             pointer-events: none;
             opacity: 0;
@@ -77,7 +77,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 4; /* overlay üstünde olacak butonlar için */
+            z-index: 4;
         }
         .content {
             background: rgba(0, 0, 0, 0.50);
@@ -86,7 +86,9 @@
             color: #fff;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+            box-shadow:
+                0 4px 32px 0 rgba(0,0,0,0.18),
+                0 0 32px 8px rgba(90,180,255,0.22);
             z-index: 4;
             max-width: 98vw;
             min-width: 540px;
@@ -174,7 +176,7 @@
 <body>
     <div id="backgroundGradient"></div>
     <div id="hero">
-        <video id="girisVideo" autoplay loop muted>
+        <video id="girisVideo" muted>
             <source src="video/basla.mp4" type="video/mp4">
         </video>
     </div>
@@ -195,6 +197,7 @@
         const videoOverlay = document.getElementById('videoOverlay');
 
         introBtn.addEventListener('click', function() {
+            girisVideo.currentTime = 0;   // Videoyu başa sar
             girisVideo.classList.add('visible');
             girisVideo.muted = false;
             girisVideo.volume = 1;
