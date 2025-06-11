@@ -20,7 +20,7 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+              background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
             transition: opacity 0.7s;
         }
         #backgroundGradient.hidden {
@@ -31,7 +31,7 @@
             inset: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.12);
             z-index: 3;
             pointer-events: none;
             opacity: 0;
@@ -176,7 +176,7 @@
 <body>
     <div id="backgroundGradient"></div>
     <div id="hero">
-        <video id="girisVideo" muted>
+        <video id="girisVideo" autoplay loop muted>
             <source src="video/basla.mp4" type="video/mp4">
         </video>
     </div>
