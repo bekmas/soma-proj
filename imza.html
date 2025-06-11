@@ -12,6 +12,10 @@
             padding: 0;
             overflow: hidden;
             background: #000;
+              box-sizing: border-box;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
         }
         #backgroundGradient {
             position: fixed;
@@ -68,30 +72,28 @@
         #girisVideo.visible {
             opacity: 1;
         }
-        .body-container {
-            position: absolute;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
+         .body-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 4; /* overlay üstünde olacak butonlar için */
+            height: 100vh;
+            position: relative;
         }
         .content {
-            background: rgba(0, 0, 0, 0.45); /* Hafif şeffaf kutucuk */
-            padding: 40px 60px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px;
             border-radius: 20px;
             color: #fff;
+            max-width: 750px;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: 0 2px 24px 0 rgba(0,0,0,0.15);
-            z-index: 4;
-            max-width: 90vw;
-            min-width: 270px;
-            backdrop-filter: blur(2px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            font-size: 20px;
+            animation: fadeIn 1.5s ease forwards;
+            z-index: 1;
         }
+
         #introTitle {
             font-size: 22px;
             font-weight: bold;
