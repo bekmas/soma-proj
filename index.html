@@ -1,3 +1,115 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hikayeye Başla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        #hero {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        #hero video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(0.7) blur(1px);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .body-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .content {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 40px 60px;
+            border-radius: 20px;
+            color: #fff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 28px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            z-index: 1;
+        }
+        .basla {
+            font-size: 2rem;
+            padding: 18px 48px;
+            border-radius: 30px;
+            border: none;
+            background: #fff;
+            color: #181818;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        .basla:hover {
+            background: #222;
+            color: #fff;
+        }
+        h1 {
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+        @media (max-width: 768px) {
+            .content {
+                font-size: 18px;
+                padding: 20px;
+                max-width: 95vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="hero">
+        <video autoplay loop muted>
+            <source src="video/basla.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="body-container">
+        <div class="content">
+            <h1>İnteraktif Haber Oyununa Hoşgeldiniz</h1>
+            <button class="basla" id="basla">BAŞLA</button>
+        </div>
+    </div>
+    <audio id="background-music" src="sounds2/arkaplan.mp3" preload="auto" loop></audio>
+    <script>
+        document.getElementById('basla').addEventListener('click', function() {
+            var music = document.getElementById('background-music');
+            music.currentTime = 0;
+            music.play();
+            localStorage.setItem("music_should_play", "yes");
+            setTimeout(function(){
+                window.location.href = "secim.html";
+            }, 300);
+        });
+    </script>
+</body>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
