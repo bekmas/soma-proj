@@ -20,7 +20,7 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-         background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
             transition: opacity 0.7s;
         }
         #backgroundGradient.hidden {
@@ -79,7 +79,7 @@
             align-items: center;
             z-index: 4; /* overlay üstünde olacak butonlar için */
         }
-   .content {
+        .content {
             background: rgba(0, 0, 0, 0.50);
             padding: 80px 140px;
             border-radius: 32px;
@@ -93,7 +93,7 @@
             backdrop-filter: blur(3px);
         }
         #introTitle {
-            font-size: 2.4rem;
+            font-size: 3.2rem;
             font-weight: bold;
             margin-bottom: 32px;
         }
@@ -109,17 +109,17 @@
             transition: 0.2s;
         }
         .buton {
-            font-size: 18px;
-            padding: 10px 32px;
+            font-size: 1.4rem;
+            padding: 16px 48px;
             border-radius: 30px;
             border: none;
             background: #fff;
             color: #181818;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 16px;
             transition: 0.2s;
         }
-        .buton:hover {
+        .buton:hover, #introBtn:hover {
             background: #222;
             color: #fff;
         }
@@ -130,8 +130,8 @@
             transform: translate(-50%, 0);
             margin-top: 0;
             z-index: 5;
-            font-size: 20px;
-            padding: 12px 38px;
+            font-size: 1.5rem;
+            padding: 14px 48px;
             background: #fff !important;
             color: #181818 !important;
             border: none;
@@ -143,23 +143,30 @@
         .hidden {
             display: none !important;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .content {
-                font-size: 16px;
-                padding: 16px;
-                max-width: 95vw;
+                padding: 36px 12vw;
+                min-width: 0;
             }
             #introTitle {
-                font-size: 50px;
+                font-size: 2.2rem;
             }
             #introBtn, .buton {
-                font-size: 15px;
-                padding: 8px 20px;
+                font-size: 1.1rem;
+                padding: 12px 30px;
             }
             #baslaBtn {
-                font-size: 17px;
-                padding: 9px 25px;
+                font-size: 1.1rem;
+                padding: 12px 30px;
                 top: 78%;
+            }
+        }
+        @media (max-width: 600px) {
+            .content {
+                padding: 16px 4vw;
+            }
+            #introTitle {
+                font-size: 1.3rem;
             }
         }
     </style>
