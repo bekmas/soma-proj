@@ -2,56 +2,212 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <title>Başlangıç Hikayeye</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hikayeye Başla</title>
     <style>
         html, body {
-            width: 100vw; height: 100vh; margin: 0; padding: 0; box-sizing: border-box;
-            overflow: hidden; font-family: 'Arial', sans-serif;
-            background: #181818;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
         }
-        .center-box {
-            width: 100vw; height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; background: rgba(0,0,0,0.7);
+        #backgroundGradient {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 3% 5%, #000000 3%, #13133d 30%, #051d4b 60%, #000000 100%);
+            transition: opacity 0.7s;
         }
-        .basla-btn {
-            font-size: 2rem;
+        #backgroundGradient.hidden {
+            opacity: 0;
+        }
+        #videoOverlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.12);
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.7s;
+        }
+        #videoOverlay.visible {
+            opacity: 1;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        #hero {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background: transparent;
+            transition: background 0.7s;
+        }
+        #girisVideo {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(1) blur(1px);
+            opacity: 0;
+            transition: opacity 0.7s;
+            z-index: 2;
+        }
+        #girisVideo.visible {
+            opacity: 1;
+        }
+        .body-container {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 4;
+        }
+        .content {
+            background: rgba(0, 0, 0, 0.50);
+            padding: 80px 140px;
+            border-radius: 32px;
+            color: #fff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18), 0 0 32px 8px rgba(90,180,255,0.22);
+            z-index: 4;
+            max-width: 98vw;
+            min-width: 540px;
+            backdrop-filter: blur(3px);
+        }
+        #introTitle {
+            font-size: 3.2rem;
+            font-weight: bold;
+            margin-bottom: 32px;
+        }
+        #introBtn, .buton {
+            font-size: 1.4rem;
+            padding:16px 48px;
+            border-radius: 30px;
+            border: none;
             background: #fff;
             color: #181818;
-            border: none;
-            padding: 18px 48px;
-            border-radius: 30px;
-            box-shadow: 0 2px 18px #0005;
             cursor: pointer;
-            margin-top: 40px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
+            margin-top: 16px;
+            transition: 0.2s;
         }
-        .basla-btn:hover {
+        .buton {
+            font-size: 1.4rem;
+            padding: 16px 48px;
+            border-radius: 30px;
+            border: none;
+            background: #fff;
+            color: #181818;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: 0.2s;
+        }
+        .buton:hover, #introBtn:hover {
             background: #222;
             color: #fff;
-            transform: scale(1.09);
+        }
+        #baslaBtn {
+            position: absolute;
+            left: 50%;
+            top: 82%;
+            transform: translate(-50%, 0);
+            margin-top: 0;
+            z-index: 5;
+            font-size: 1.5rem;
+            padding: 14px 48px;
+            background: #fff !important;
+            color: #181818 !important;
+            border: none;
+        }
+        #baslaBtn:hover {
+            background: #222 !important;
+            color: #fff !important;
+        }
+        .hidden {
+            display: none !important;
+        }
+        @media (max-width: 900px) {
+            .content {
+                padding: 36px 12vw;
+                min-width: 0;
+            }
+            #introTitle {
+                font-size: 2.2rem;
+            }
+            #introBtn, .buton {
+                font-size: 1.1rem;
+                padding: 12px 30px;
+            }
+            #baslaBtn {
+                font-size: 1.1rem;
+                padding: 12px 30px;
+                top: 78%;
+            }
+        }
+        @media (max-width: 600px) {
+            .content {
+                padding: 16px 4vw;
+            }
+            #introTitle {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="center-box">
-        <h1 style="color:white; font-size:2.3rem;">İnteraktif Haber Oyununa Hoşgeldiniz</h1>
-        <button class="basla-btn" id="baslaBtn">BAŞLA</button>
+    <div id="backgroundGradient"></div>
+    <div id="hero">
+        <video id="girisVideo" autoplay loop muted>
+            <source src="video/basla.mp4" type="video/mp4">
+        </video>
     </div>
-    <!-- Müzik gizli şekilde yüklenir -->
-    <audio id="background-music" src="sounds2/arkaplan.mp3" preload="auto" loop></audio>
+    <div id="videoOverlay"></div>
+    <div class="body-container">
+        <div class="content" id="introContent">
+            <h1 id="introTitle">Etkileşimli Haber Oyununa Hoş Geldiniz</h1>
+            <button class="buton" id="introBtn">GİRİŞ</button>
+        </div>
+        <button class="buton hidden" id="baslaBtn">BAŞLA</button>
+    </div>
     <script>
-        document.getElementById('baslaBtn').addEventListener('click', function() {
-            var music = document.getElementById('background-music');
-            music.currentTime = 0;
-            music.play();
-            // Diğer sayfanın otomatik müzik başlatabilmesi için localStorage ile işaret bırak
-            localStorage.setItem("music_should_play", "yes");
-            setTimeout(function(){
-                window.location.href = "index.html"; // Burayı istediğin ilk oyun sayfan ile değiştir!
-            }, 300); // 0.3 sn gecikme, müzik başlasın
+        const introBtn = document.getElementById('introBtn');
+        const baslaBtn = document.getElementById('baslaBtn');
+        const girisVideo = document.getElementById('girisVideo');
+        const introContent = document.getElementById('introContent');
+        const backgroundGradient = document.getElementById('backgroundGradient');
+        const videoOverlay = document.getElementById('videoOverlay');
+
+        introBtn.addEventListener('click', function() {
+            girisVideo.currentTime = 0; // Videoyu başlat
+            girisVideo.classList.add('visible');
+            girisVideo.muted = false;
+            girisVideo.volume = 1;
+            girisVideo.play();
+            introContent.classList.add('hidden');
+            baslaBtn.classList.remove('hidden');
+            backgroundGradient.classList.add('hidden');
+            videoOverlay.classList.add('visible');
+        });
+
+        baslaBtn.addEventListener('click', function() {
+            window.location.href = "secim.html";
         });
     </script>
 </body>
