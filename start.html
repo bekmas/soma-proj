@@ -1,74 +1,199 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>İnteraktif Haber Oyunu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    html, body {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    #bgVideo {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      pointer-events: none;
-      filter: brightness(0.7) blur(1px);
-    }
-    .body-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      position: relative;
-    }
-    .content {
-      background: rgba(0,0,0,0.75);
-      border-radius: 36px;
-      padding: 60px 40px;
-      text-align: center;
-      color: #fff;
-      font-size: 2.5rem;
-      font-family: Arial, sans-serif;
-      box-shadow: 0 0 80px 20px rgba(0,0,0,0.25);
-    }
-    .intro-btn {
-      margin-top: 48px;
-      padding: 20px 50px;
-      border-radius: 38px;
-      font-size: 1.4rem;
-      background: #fff;
-      color: #181818;
-      border: none;
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .intro-btn:hover {
-      background: #222;
-      color: #fff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Hikayeye Başla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        #backgroundGradient {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+            transition: opacity 0.7s;
+        }
+        #backgroundGradient.hidden {
+            opacity: 0;
+        }
+        #videoOverlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.10); /* Hafif siyah perde */
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.7s;
+        }
+        #videoOverlay.visible {
+            opacity: 1;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        #hero {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background: transparent;
+            transition: background 0.7s;
+        }
+        #girisVideo {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(1) blur(1px);
+            opacity: 0;
+            transition: opacity 0.7s;
+            z-index: 2;
+        }
+        #girisVideo.visible {
+            opacity: 1;
+        }
+        .body-container {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 4; /* overlay üstünde olacak butonlar için */
+        }
+        .content {
+            background: transparent;
+            padding: 40px 60px;
+            border-radius: 20px;
+            color: #fff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            box-shadow: none;
+            z-index: 4;
+            max-width: 90vw;
+            min-width: 270px;
+        }
+        #introTitle {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #introBtn {
+            font-size: 18px;
+            padding: 10px 32px;
+            margin-top: 20px;
+        }
+        .buton {
+            font-size: 18px;
+            padding: 10px 32px;
+            border-radius: 30px;
+            border: none;
+            background: #fff;
+            color: #181818;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+        .buton:hover {
+            background: #222;
+            color: #fff;
+        }
+        #baslaBtn {
+            position: absolute;
+            left: 50%;
+            top: 82%;
+            transform: translate(-50%, 0);
+            margin-top: 0;
+            z-index: 5;
+            font-size: 20px;
+            padding: 12px 38px;
+            background: #fff !important;
+            color: #181818 !important;
+            border: none;
+        }
+        #baslaBtn:hover {
+            background: #222 !important;
+            color: #fff !important;
+        }
+        .hidden {
+            display: none !important;
+        }
+        @media (max-width: 768px) {
+            .content {
+                font-size: 16px;
+                padding: 16px;
+                max-width: 95vw;
+            }
+            #introTitle {
+                font-size: 16px;
+            }
+            #introBtn, .buton {
+                font-size: 15px;
+                padding: 8px 20px;
+            }
+            #baslaBtn {
+                font-size: 17px;
+                padding: 9px 25px;
+                top: 78%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Arkaplan videosu -->
-  <video id="bgVideo" autoplay loop muted playsinline>
-    <source src="video/giris.mp4" type="video/mp4">
-  </video>
-
-  <!-- İçerik -->
-  <div class="body-container">
-    <div class="content">
-      <div>İnteraktif Haber Oyununa Hoşgeldiniz</div>
-      <button class="intro-btn">INTRO</button>
+    <div id="backgroundGradient"></div>
+    <div id="hero">
+        <video id="girisVideo" autoplay loop muted>
+            <source src="video/basla.mp4" type="video/mp4">
+        </video>
     </div>
-  </div>
+    <div id="videoOverlay"></div>
+    <div class="body-container">
+        <div class="content" id="introContent">
+            <h1 id="introTitle">İnteraktif Haber Oyununa Hoşgeldiniz</h1>
+            <button class="buton" id="introBtn">INTRO</button>
+        </div>
+        <button class="buton hidden" id="baslaBtn">BAŞLA</button>
+    </div>
+    <script>
+        const introBtn = document.getElementById('introBtn');
+        const baslaBtn = document.getElementById('baslaBtn');
+        const girisVideo = document.getElementById('girisVideo');
+        const introContent = document.getElementById('introContent');
+        const backgroundGradient = document.getElementById('backgroundGradient');
+        const videoOverlay = document.getElementById('videoOverlay');
+
+        introBtn.addEventListener('click', function() {
+            girisVideo.classList.add('visible');
+            girisVideo.muted = false;
+            girisVideo.volume = 1;
+            girisVideo.play();
+            introContent.classList.add('hidden');
+            baslaBtn.classList.remove('hidden');
+            backgroundGradient.classList.add('hidden');
+            videoOverlay.classList.add('visible');
+        });
+
+        baslaBtn.addEventListener('click', function() {
+            window.location.href = "secim.html";
+        });
+    </script>
 </body>
 </html>
