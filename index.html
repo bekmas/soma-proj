@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Hikayeye Başla</title>
+    <title>Başlangıç Hikayeye</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         html, body {
@@ -13,18 +13,75 @@
             overflow: hidden;
             background: #000;
         }
+        #backgroundVideo {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.7s;
+        }
+        #backgroundVideo.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
         #backgroundGradient {
             position: fixed;
             inset: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
-            background: radial-gradient(circle at 3% 5%, #000000 3%,#13133d 30% , #051d4b 60%,#000000 100%);
+            background: radial-gradient(circle at 3% 5%, #000000 3%, #13133d 30%, #051d4b 60%, #000000 100%);
             transition: opacity 0.7s;
         }
         #backgroundGradient.hidden {
             opacity: 0;
+        }
+        #videoOverlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.12);
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.7s;
+        }
+        #videoOverlay.visible {
+            opacity: 1;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        #hero {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            background: transparent;
+            transition: background 0.7s;
+        }
+        #girisVideo {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(1) blur(1px);
+            opacity: 0;
+            transition: opacity 0.7s;
+            z-index: 3;
+        }
+        #girisVideo.visible {
+            opacity: 1;
         }
         .body-container {
             position: absolute;
@@ -35,7 +92,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 4;
+            z-index: 10;
         }
         .content {
             background: rgba(0, 0, 0, 0.50);
@@ -44,20 +101,20 @@
             color: #fff;
             text-align: center;
             font-family: 'Arial', sans-serif;
-            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
-            z-index: 4;
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18), 0 0 32px 8px rgba(90,180,255,0.22);
+            z-index: 10;
             max-width: 98vw;
             min-width: 540px;
             backdrop-filter: blur(3px);
         }
         #introTitle {
-            font-size: 2.4rem;
+            font-size: 3.2rem;
             font-weight: bold;
             margin-bottom: 32px;
         }
-        #introBtn {
+        #introBtn, .buton {
             font-size: 1.4rem;
-            padding: 16px 48px;
+            padding:16px 48px;
             border-radius: 30px;
             border: none;
             background: #fff;
@@ -66,9 +123,29 @@
             margin-top: 16px;
             transition: 0.2s;
         }
-        #introBtn:hover {
+        .buton:hover, #introBtn:hover {
             background: #222;
             color: #fff;
+        }
+        #baslaBtn {
+            position: absolute;
+            left: 50%;
+            top: 82%;
+            transform: translate(-50%, 0);
+            margin-top: 0;
+            z-index: 20;
+            font-size: 1.5rem;
+            padding: 14px 48px;
+            background: #fff !important;
+            color: #181818 !important;
+            border: none;
+        }
+        #baslaBtn:hover {
+            background: #222 !important;
+            color: #fff !important;
+        }
+        .hidden {
+            display: none !important;
         }
         @media (max-width: 900px) {
             .content {
@@ -76,32 +153,78 @@
                 min-width: 0;
             }
             #introTitle {
-                font-size: 1.3rem;
+                font-size: 2.2rem;
             }
-            #introBtn {
-                font-size: 1rem;
+            #introBtn, .buton {
+                font-size: 1.1rem;
                 padding: 12px 30px;
+            }
+            #baslaBtn {
+                font-size: 1.1rem;
+                padding: 12px 30px;
+                top: 78%;
             }
         }
         @media (max-width: 600px) {
             .content {
                 padding: 16px 4vw;
             }
+            #introTitle {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- İlk ekranda arka plan videosu -->
+    <video id="backgroundVideo" autoplay loop muted>
+        <source src="video/giriş.mp4" type="video/mp4">
+    </video>
+
     <div id="backgroundGradient"></div>
+    <div id="hero">
+        <!-- INTRO'ya tıklanınca oynatılacak giriş videosu -->
+        <video id="girisVideo" autoplay loop muted>
+            <source src="video/basla.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div id="videoOverlay"></div>
     <div class="body-container">
         <div class="content" id="introContent">
-            <h1 id="introTitle">İnteraktif Haber Oyununa Hoşgeldiniz</h1>
-            <button class="buton" id="introBtn">INTRO</button>
+            <h1 id="introTitle">Etkileşimli Haber Oyununa Hoş Geldiniz</h1>
+            <button class="buton" id="introBtn">GİRİŞ</button>
         </div>
+        <button class="buton hidden" id="baslaBtn">BAŞLA</button>
     </div>
     <script>
         const introBtn = document.getElementById('introBtn');
+        const baslaBtn = document.getElementById('baslaBtn');
+        const girisVideo = document.getElementById('girisVideo');
+        const backgroundVideo = document.getElementById('backgroundVideo');
+        const introContent = document.getElementById('introContent');
+        const backgroundGradient = document.getElementById('backgroundGradient');
+        const videoOverlay = document.getElementById('videoOverlay');
+
+        // Sayfa açılışında giriş videosu görünmez, arka plan videosu görünür
+        girisVideo.classList.remove('visible');
+        backgroundVideo.classList.remove('hidden');
+
         introBtn.addEventListener('click', function() {
-            // Buraya video başlatma ve geçiş kodlarını ekleyebilirsin
+            // Arka plan videosunu gizle
+            backgroundVideo.classList.add('hidden');
+            // Giriş videosunu göster
+            girisVideo.currentTime = 0;
+            girisVideo.classList.add('visible');
+            girisVideo.muted = false;
+            girisVideo.volume = 1;
+            girisVideo.play();
+            introContent.classList.add('hidden');
+            baslaBtn.classList.remove('hidden');
+            backgroundGradient.classList.add('hidden');
+            videoOverlay.classList.add('visible');
+        });
+
+        baslaBtn.addEventListener('click', function() {
             window.location.href = "secim.html";
         });
     </script>
