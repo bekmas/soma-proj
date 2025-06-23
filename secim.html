@@ -156,7 +156,6 @@ Ve ardından gelen o ağır, sarsıcı sessizlik.
 <br>Üç gün sonra çıkarıldığında, 301 kişi geride kalmıştı. Sen ise “şanslı”ydın; hayattaydın.
 Ama şimdi, seni asıl boğacak karanlıkla yüzleşmenin vakti geldi:
 Gerçeği mi seçeceksin, suskunluğu mu?
-
             </p>
             <div class="divider"></div>
             <div class="choice-bar">
@@ -174,9 +173,8 @@ Gerçeği mi seçeceksin, suskunluğu mu?
     <!-- MP3 ses dosyası -->
     <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
     <script>
-      // Sayfa açılırken, history stack'e bir state ekle (geri gelince engellemek için)
+      // Her sayfada geri tuşunu devre dışı bırak
       history.pushState(null, null, location.href);
-
       window.addEventListener('popstate', function (event) {
         history.pushState(null, null, location.href);
       });
@@ -197,7 +195,7 @@ Gerçeği mi seçeceksin, suskunluğu mu?
           }
           var href = this.href;
 
-          // Seçim yapıldığında geri tuşunu tamamen devredışı bırakmak için yeni bir state ekle
+          // Yeni bir state ekle (geri tuşu için)
           history.pushState(null, null, location.href);
 
           setTimeout(function() {
