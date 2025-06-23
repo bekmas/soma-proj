@@ -88,25 +88,33 @@
     }
     .content {
       background: rgba(0, 0, 0, 0.62);
-      padding: 60px 80px;
-      border-radius: 36px;
+      /* Geniş ve alçak kutu için: */
+      width: 80vw;
+      max-width: 1200px;
+      min-width: 340px;
+      height: 260px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 40px;
       color: #fff;
       text-align: center;
       font-family: 'Arial', sans-serif;
       box-shadow: 0 8px 40px 0 rgba(0,0,0,0.36), 0 0 32px 8px rgba(90,180,255,0.12);
       z-index: 2;
-      max-width: 98vw;
-      min-width: 420px;
       backdrop-filter: blur(2.5px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin-top: 0;
+      margin-bottom: 0;
+      /* Kutunun yukarıdan biraz daha aşağıda başlaması için: */
+      /* padding-top: 40px; */
     }
     #introTitle {
       font-size: 2.8rem;
       font-weight: bold;
-      margin-bottom: 38px;
-      line-height: 1.2;
+      margin-bottom: 32px;
+      line-height: 1.15;
     }
     #introBtn, .buton {
       font-size: 1.35rem;
@@ -116,11 +124,13 @@
       background: #fff;
       color: #181818;
       cursor: pointer;
-      margin-top: 18px;
+      margin-top: 12px;
       transition: 0.17s;
       font-weight: 600;
       box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
       outline: none;
+      /* Daha belirgin ve kutunun biraz altında olması için: */
+      /* position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); */
     }
     .buton:hover, #introBtn:hover {
       background: #181818;
@@ -131,8 +141,10 @@
     }
     @media (max-width: 900px) {
       .content {
-        padding: 36px 8vw;
+        width: 95vw;
+        height: auto;
         min-width: 0;
+        padding: 30px 4vw;
       }
       #introTitle {
         font-size: 2rem;
@@ -148,7 +160,9 @@
     }
     @media (max-width: 600px) {
       .content {
-        padding: 16px 2vw;
+        padding: 10px 1vw;
+        width: 98vw;
+        height: auto;
       }
       #introTitle {
         font-size: 1.1rem;
