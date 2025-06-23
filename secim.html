@@ -174,11 +174,19 @@ Gerçeği mi seçeceksin, suskunluğu mu?
     <!-- MP3 ses dosyası -->
     <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
     <script>
+      // Sayfa açılırken, history stack'e bir state ekle (geri gelince engellemek için)
+      history.pushState(null, null, location.href);
+
+      window.addEventListener('popstate', function (event) {
+        history.pushState(null, null, location.href);
+      });
+
       document.addEventListener('click', function startMusic() {
         var music = document.getElementById('background-music');
         if (music && music.paused) music.play();
         document.removeEventListener('click', startMusic);
       });
+
       document.querySelectorAll('.choice-link, .choice-button').forEach(function(link) {
         link.addEventListener('click', function(e) {
           e.preventDefault();
@@ -188,6 +196,10 @@ Gerçeği mi seçeceksin, suskunluğu mu?
             snd.play();
           }
           var href = this.href;
+
+          // Seçim yapıldığında geri tuşunu tamamen devredışı bırakmak için yeni bir state ekle
+          history.pushState(null, null, location.href);
+
           setTimeout(function() {
             window.location.href = href;
           }, 200);
