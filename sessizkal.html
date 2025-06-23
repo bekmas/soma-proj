@@ -149,6 +149,13 @@
   <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
   <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
   <script>
+    <script>
+  // Sayfa yüklendiğinde history'ye bir state ekle
+  history.pushState(null, null, location.href);
+  window.addEventListener('popstate', function (event) {
+    history.pushState(null, null, location.href);
+  });
+</script>
     document.addEventListener('click', function startMusic() {
       var music = document.getElementById('background-music');
       if (music && music.paused) music.play();
