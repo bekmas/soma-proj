@@ -176,7 +176,8 @@ Gerçeği mi seçeceksin, suskunluğu mu?
       // Her sayfada geri tuşunu devre dışı bırak
       history.pushState(null, null, location.href);
       window.addEventListener('popstate', function (event) {
-        history.pushState(null, null, location.href);
+        // Kullanıcı geri tuşuna basarsa ileri gitmeye zorla
+        history.go(1);
       });
 
       document.addEventListener('click', function startMusic() {
