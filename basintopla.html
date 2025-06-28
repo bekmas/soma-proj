@@ -139,6 +139,15 @@
                 object-fit: contain;
             }
         }
+        #hero video {
+    transform: scale(1.13);
+    transition: transform 0.4s;
+}
+@media (max-width: 768px) {
+    #hero video {
+        transform: scale(1.07);
+    }
+}
     </style>
 </head>
 <body>
@@ -200,7 +209,7 @@ Bilinmeyen bir numara.
       var href = this.href;
       setTimeout(function() {
         window.location.href = href;
-      }, 600);
+      }, 200);
     });
   });
 </script>
