@@ -35,6 +35,8 @@
             left: 0;
             filter: brightness(0.7) blur(1px);
             pointer-events: none;
+            transition: transform 0.4s;
+            transform: scale(1.13); /* Büyük ekran için yakınlaştırma */
         }
         .body-container {
             display: flex;
@@ -120,11 +122,24 @@
                 transform: translateY(0);
             }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
+            #hero video {
+                transform: scale(1.08); /* Tablet için biraz daha az yakınlaşma */
+            }
             .content {
                 font-size: 18px;
                 padding: 20px;
                 max-width: 95vw;
+            }
+        }
+        @media (max-width: 600px) {
+            #hero video {
+                transform: scale(1.03); /* Mobil için daha az yakınlaşma */
+            }
+            .content {
+                font-size: 16px;
+                padding: 14px;
+                max-width: 98vw;
             }
             .choice-bar {
                 flex-direction: column;
@@ -134,9 +149,6 @@
             .choice-link, .choice-button {
                 font-size: 20px;
                 letter-spacing: 1px;
-            }
-            #hero video {
-                object-fit: contain;
             }
         }
     </style>
@@ -150,55 +162,49 @@
 
   <div class="body-container">
     <div class="content">
-      
       <p><strong>Bir süre odanın içinde sessizce oturuyorsun. USB belleğe bakıyorsun.</strong><br>
       <em>Sonra kalkıp pencereden dışarıyı seyrediyorsun.</em></p>
-<strong>Ertesi gün, şirketin avukatı masanın üzerine bir çek bırakıyor:</strong>
-            <em>"İmzala. Çocuğunun okul parası bizden."</em>
-            Karın:"Kabul etmelisin. Artık kaybedecek kimsemiz yok."</em>
-            <small>Ama madende ölen dostunun sesi kulaklarında yankılanıyor</small><br>
+      <strong>Ertesi gün, şirketin avukatı masanın üzerine bir çek bırakıyor:</strong>
+      <em>"İmzala. Çocuğunun okul parası bizden."</em>
+      Karın:"Kabul etmelisin. Artık kaybedecek kimsemiz yok."
+      <small>Ama madende ölen dostunun sesi kulaklarında yankılanıyor</small><br>
       <div class="divider"></div>
       <div class="choice-bar">
         <div>
-
-          <a href="imza.html"class="choice-link">İmzala</a>
+          <a href="imza.html" class="choice-link">İmzala</a>
         </div>
-
         <div>
-          <a href="tereddut.html"class="choice-link">Tereddüt Et</a>
+          <a href="tereddut.html" class="choice-link">Tereddüt Et</a>
         </div>
       </div>
-
     </div>
   </div>
   <!-- Arka plan müziği -->
-     <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
-    <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
-<script>
-  document.addEventListener('click', function startMusic() {
-    var music = document.getElementById('background-music');
-    if (music && music.paused) music.play();
-    document.removeEventListener('click', startMusic);
-  });
-</script>
- <!-- MP3 ses dosyası -->
-   <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
-
-<script>
-  document.querySelectorAll('.choice-link, .choice-button').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var snd = document.getElementById('click-sound');
-      if (snd) {
-        snd.currentTime = 0;
-        snd.play();
-      }
-      var href = this.href;
-      setTimeout(function() {
-        window.location.href = href;
-      }, 200);
+  <audio id="background-music" src="sounds2/arkaplan.mp3" autoplay loop></audio>
+  <script>
+    document.addEventListener('click', function startMusic() {
+      var music = document.getElementById('background-music');
+      if (music && music.paused) music.play();
+      document.removeEventListener('click', startMusic);
     });
-  });
-</script>
+  </script>
+  <!-- MP3 ses dosyası -->
+  <audio id="click-sound" src="sounds/mixkit-transition.mp3" preload="auto"></audio>
+  <script>
+    document.querySelectorAll('.choice-link, .choice-button').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var snd = document.getElementById('click-sound');
+        if (snd) {
+          snd.currentTime = 0;
+          snd.play();
+        }
+        var href = this.href;
+        setTimeout(function() {
+          window.location.href = href;
+        }, 200);
+      });
+    });
+  </script>
 </body>
 </html>

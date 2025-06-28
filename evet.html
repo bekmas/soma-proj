@@ -5,39 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seçim Ekranı</title>
   <style>
-    html, body {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-    *, *::before, *::after { box-sizing: inherit; }
-    #hero {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: -1;
-      overflow: hidden;
-    }
-    #hero video {
-      width: 100vw; height: 100vh;
-      object-fit: cover;
-      object-position: center;
-      position: absolute;
-      top: 0; left: 0;
-      filter: brightness(0.7) blur(1px);
-      pointer-events: none;
-    }
-    .body-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      position: relative;
-    }
+  html, body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        #hero {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+#hero video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(0.7) blur(1px);
+  pointer-events: none;
+  transition: transform 0.4s;
+  transform: scale(1.13); /* Büyük ekran için */
+}
+
+@media (max-width: 1024px) {
+  #hero video {
+    transform: scale(1.08); /* Tablet için */
+  }
+}
+
+@media (max-width: 600px) {
+  #hero video {
+    transform: scale(1.03); /* Mobil için */
+  }
+}
+        .body-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
     .content {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 30px;

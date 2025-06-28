@@ -37,7 +37,8 @@
       opacity: 0;
       pointer-events: none;
       background: #000;
-      transition: opacity 0.4s;
+      transition: opacity 0.4s, transform 0.4s;
+      transform: scale(1.18); /* Varsayılan: büyük ekran için yakınlaştır */
     }
     #introVideo.visible {
       opacity: 1;
@@ -88,7 +89,6 @@
     }
     .content {
       background: rgba(0, 0, 0, 0.62);
-      /* Geniş ve alçak kutu için: */
       width: 80vw;
       max-width: 1200px;
       min-width: 340px;
@@ -107,8 +107,6 @@
       backdrop-filter: blur(2.5px);
       margin-top: 0;
       margin-bottom: 0;
-      /* Kutunun yukarıdan biraz daha aşağıda başlaması için: */
-      /* padding-top: 40px; */
     }
     #introTitle {
       font-size: 2.8rem;
@@ -129,8 +127,6 @@
       font-weight: 600;
       box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
       outline: none;
-      /* Daha belirgin ve kutunun biraz altında olması için: */
-      /* position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); */
     }
     .buton:hover, #introBtn:hover {
       background: #181818;
@@ -139,6 +135,7 @@
     .hidden {
       display: none !important;
     }
+    /* Tablet ve küçük ekranlar için video yakınlaştırmayı azalt */
     @media (max-width: 900px) {
       .content {
         width: 95vw;
@@ -157,6 +154,9 @@
         font-size: 1rem;
         padding: 12px 26px;
       }
+      #introVideo {
+        transform: scale(1.10);
+      }
     }
     @media (max-width: 600px) {
       .content {
@@ -170,6 +170,9 @@
       #introBtn, .buton, #devamBtn {
         font-size: 0.93rem;
         padding: 10px 14px;
+      }
+      #introVideo {
+        transform: scale(1.04);
       }
     }
   </style>
