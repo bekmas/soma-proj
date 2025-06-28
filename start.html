@@ -18,33 +18,73 @@
       position: absolute;
       top: 0; left: 0;
       z-index: 1;
+      filter: brightness(0.7) blur(1.2px);
+      transform: scale(2.12); /* Yakınlaştırma masaüstü için */
+      transition: filter 0.4s, transform 0.4s;
+    }
+    @media (max-width: 900px) {
+      #tanitimVideo {
+        transform: scale(1.07); /* Tablet için biraz daha az yakınlaştırma */
+      }
+    }
+    @media (max-width: 600px) {
+      #tanitimVideo {
+        transform: scale(1.03); /* Telefon için daha az yakınlaştırma */
+      }
     }
     #devamBtn {
       position: absolute;
-      bottom: 40px;
+      bottom: 8vh;
       left: 50%;
       transform: translateX(-50%);
-      padding: 18px 48px;
-      font-size: 1.3rem;
+      padding: 1.25em 3.5em;
+      font-size: 1.35rem;
       border: none;
-      border-radius: 28px;
-      background: #fff;
-      color: #181818;
+      border-radius: 38px;
+      background: rgba(40,40,40,0.27);
+      color: #fff;
       font-weight: 700;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+      box-shadow: 0 2px 24px 0 #0053b866, 0 2px 16px rgba(0,0,0,0.18);
       cursor: pointer;
-      transition: 0.18s;
       opacity: 0;
       pointer-events: none;
       z-index: 3;
+      transition: 0.22s, box-shadow 0.22s;
+      text-shadow:
+        0 0 14px #fff,
+        0 0 18px #87cefa,
+        0 0 8px #fff,
+        0 2px 8px #0053b8;
+      backdrop-filter: blur(2px);
     }
     #devamBtn.visible {
       opacity: 1;
       pointer-events: auto;
     }
     #devamBtn:hover {
-      background: #222;
+      background: rgba(24,24,24,0.45);
       color: #fff;
+      text-shadow:
+        0 0 32px #fff,
+        0 0 30px #87cefa,
+        0 0 14px #fff;
+      box-shadow: 0 0 34px 0 #87cefa88, 0 2px 12px 0 rgba(0,0,0,0.21);
+    }
+    @media (max-width: 900px) {
+      #devamBtn {
+        font-size: 1rem;
+        padding: 0.85em 2em;
+        border-radius: 28px;
+        bottom: 6vh;
+      }
+    }
+    @media (max-width: 600px) {
+      #devamBtn {
+        font-size: 0.9rem;
+        padding: 0.7em 1.3em;
+        border-radius: 18px;
+        bottom: 4vh;
+      }
     }
   </style>
 </head>
@@ -58,20 +98,21 @@
   <script>
     const video = document.getElementById('tanitimVideo');
     const devamBtn = document.getElementById('devamBtn');
+    let btnShown = false;
 
-    // Videonun sonunda butonu göster
     video.addEventListener('timeupdate', function() {
-      if (video.duration - video.currentTime < 3) { // Son 3 saniye
+      if (!btnShown && video.duration - video.currentTime < 3) { // Son 3 saniye
         devamBtn.classList.add('visible');
+        btnShown = true;
       }
     });
-    // Dilersen video bitince de butonu açık bırak
     video.addEventListener('ended', function() {
       devamBtn.classList.add('visible');
+      btnShown = true;
     });
 
     devamBtn.addEventListener('click', function() {
-      window.location.href = "secim.html"; // Yönlendirme buraya
+      window.location.href = "secim.html";
     });
   </script>
 </body>
