@@ -37,7 +37,9 @@
       opacity: 0;
       pointer-events: none;
       background: #000;
-      transition: opacity 0.4s;
+      transition: opacity 0.4s, transform 0.4s;
+      /* Yakınlaştırma ile üst-alt bantlar gider */
+      transform: scale(1.13);
     }
     #introVideo.visible {
       opacity: 1;
@@ -57,10 +59,15 @@
       font-weight: 700;
       box-shadow: 0 2px 16px rgba(0,0,0,0.18);
       cursor: pointer;
-      transition: 0.18s;
+      transition: 0.18s, box-shadow 0.22s;
       opacity: 0;
       pointer-events: none;
       z-index: 20;
+      /* Gri ışıltı efekti */
+      text-shadow:
+        0 0 8px #bbb,
+        0 0 14px #eee,
+        0 2px 6px #888;
     }
     #devamBtn.visible {
       opacity: 1;
@@ -69,6 +76,10 @@
     #devamBtn:hover {
       background: #222;
       color: #fff;
+      text-shadow:
+        0 0 10px #fff,
+        0 0 15px #bebebe,
+        0 2px 8px #888;
     }
     .body-container {
       position: absolute;
@@ -87,7 +98,6 @@
       pointer-events: none;
     }
     .content {
-      /* Arka kutu kaldırıldı, sadece padding ile hizalama var */
       background: none;
       box-shadow: none;
       border-radius: 0;
@@ -114,7 +124,6 @@
       margin-bottom: 32px;
       line-height: 1.15;
       color: #fff;
-      /* Işıltı efekti */
       text-shadow:
         0 0 12px #fff,
         0 0 18px #87cefa,
@@ -126,7 +135,7 @@
       padding: 18px 42px;
       border-radius: 30px;
       border: none;
-      background: rgba(255,255,255,0.12); /* yarı saydam arka plan */
+      background: rgba(255,255,255,0.12);
       color: #fff;
       cursor: pointer;
       margin-top: 12px;
@@ -135,7 +144,6 @@
       box-shadow: 0 2px 18px 0 rgba(0,0,0,0.19);
       outline: none;
       backdrop-filter: blur(1px);
-      /* Yazıda güçlü ışıltı efekti */
       text-shadow:
         0 0 14px #fff,
         0 0 18px #87cefa,
@@ -172,6 +180,9 @@
         font-size: 1rem;
         padding: 12px 26px;
       }
+      #introVideo {
+        transform: scale(1.08);
+      }
     }
     @media (max-width: 600px) {
       .content {
@@ -186,6 +197,9 @@
       #introBtn, .buton, #devamBtn {
         font-size: 0.93rem;
         padding: 10px 14px;
+      }
+      #introVideo {
+        transform: scale(1.04);
       }
     }
   </style>
