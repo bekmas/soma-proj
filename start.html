@@ -19,17 +19,17 @@
       top: 0; left: 0;
       z-index: 1;
       filter: brightness(0.7) blur(1.2px);
-      transform: scale(1.15);
+      transform: scale(2.12); /* Yakınlaştırma masaüstü için */
       transition: filter 0.4s, transform 0.4s;
     }
     @media (max-width: 900px) {
       #tanitimVideo {
-        transform: scale(1.09);
+        transform: scale(1.07); /* Tablet için biraz daha az yakınlaştırma */
       }
     }
     @media (max-width: 600px) {
       #tanitimVideo {
-        transform: scale(1.04);
+        transform: scale(1.03); /* Telefon için daha az yakınlaştırma */
       }
     }
     #devamBtn {
@@ -93,7 +93,7 @@
     <source src="video/basla.mp4" type="video/mp4" />
     Tarayıcınız video etiketini desteklemiyor.
   </video>
-  <button id="devamBtn">MİKROFONU AL</button>
+  <button id="devamBtn">Devam Et</button>
 
   <script>
     const video = document.getElementById('tanitimVideo');
@@ -101,7 +101,7 @@
     let btnShown = false;
 
     video.addEventListener('timeupdate', function() {
-      if (!btnShown && video.duration - video.currentTime < 3) {
+      if (!btnShown && video.duration - video.currentTime < 3) { // Son 3 saniye
         devamBtn.classList.add('visible');
         btnShown = true;
       }
