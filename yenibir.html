@@ -125,12 +125,21 @@
       #hero video { object-fit: contain; }
       .retry-desc { font-size: 14px; }
     }
+    #hero video {
+    transform: scale(1.13);
+    transition: transform 0.4s;
+}
+@media (max-width: 768px) {
+    #hero video {
+        transform: scale(1.07);
+    }
+}
   </style>
 </head>
 <body>
   <div id="hero">
     <video autoplay loop muted>
-      <source src="video/video.mp4" type="video/mp4">
+      <source src="video/secimsonu.mp4" type="video/mp4">
     </video>
   </div>
 
