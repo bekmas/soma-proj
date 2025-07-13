@@ -38,7 +38,6 @@
       pointer-events: none;
       background: #000;
       transition: opacity 0.4s, transform 0.4s;
-      /* Yakınlaştırma ile üst-alt bantlar gider */
       transform: scale(1.13);
     }
     #introVideo.visible {
@@ -59,11 +58,10 @@
       font-weight: 700;
       box-shadow: 0 2px 16px rgba(0,0,0,0.18);
       cursor: pointer;
-      transition: 0.18s, box-shadow 0.22s;
+      transition: 0.18s, box-shadow 0.22s, opacity 0.35s;
       opacity: 0;
       pointer-events: none;
       z-index: 20;
-      /* Gri ışıltı efekti */
       text-shadow:
         0 0 8px #bbb,
         0 0 14px #eee,
@@ -73,7 +71,6 @@
       opacity: 1;
       pointer-events: auto;
     }
-    /* Dış ışımayı ekledik */
     #devamBtn:hover {
       background: rgba(24,24,24,0.26);
       color: #fff;
@@ -83,7 +80,6 @@
         0 0 12px #fff;
       box-shadow: 0 0 34px 0 #34343488, 0 2px 12px 0 rgba(0,0,0,0.21);
     }
-
     .body-container {
       position: absolute;
       inset: 0;
@@ -205,6 +201,10 @@
         transform: scale(1.04);
       }
     }
+    #devamBtn.gizli {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -214,7 +214,7 @@
   </video>
   
   <!-- Tanıtım videosu (loop!) -->
-  <video id="introVideo" loop autoplay >
+  <video id="introVideo" loop>
     <source src="video/basla.mp4" type="video/mp4">
     Tarayıcınız video etiketini desteklemiyor.
   </video>
@@ -235,18 +235,21 @@
     const devamBtn = document.getElementById('devamBtn');
     let devamButonGorundu = false;
 
+    // Videonun başta otomatik başlamasını engellemek için autoplay kaldırıldı.
+    // Kullanıcı butona tıklayınca video başlasın:
     introBtn.addEventListener('click', function () {
       bodyContainer.classList.add('hidden');
       backgroundVideo.style.opacity = '0';
       introVideo.classList.add('visible');
       introVideo.currentTime = 0;
+      introVideo.muted = false; // Sesi açmak için
       introVideo.play();
       devamBtn.classList.remove('visible');
       devamButonGorundu = false;
     });
 
     introVideo.addEventListener('timeupdate', function() {
-      if (!devamButonGorundu && introVideo.duration - introVideo.currentTime < 3) {
+      if (!devamButonGorundu && introVideo.duration - introVideo.currentTime < 7) {
         devamBtn.classList.add('visible');
         devamButonGorundu = true;
       }
